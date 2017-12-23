@@ -12,7 +12,7 @@ class Planet extends React.Component {
 	}
 
 	onLoginSuccess(){
-		Actions.tester();
+		Actions.reset('Login');
 	}
 
 	render(){

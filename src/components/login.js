@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet, ImageBackground } from 'react-native';
+import { Text, View, Image, StyleSheet, ImageBackground, AsyncStorage, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Input, Button} from '../common';
 import {loginAPI} from '../services/loginAPI';
 
-
+var _ = require('lodash');
 
 class Login extends React.Component {
 
@@ -13,14 +13,32 @@ class Login extends React.Component {
 		this.onLoginSuccess = this.onLoginSuccess.bind(this);
 		this.onUsernameChange = this.onUsernameChange.bind(this);
 		this.onPasswordChange = this.onPasswordChange.bind(this);
+		this.getAllCharacters = this.getAllCharacters.bind(this);
 
 		this.state={
 			logging: false,
 			username: '',
 			password: '',
+			characters: []
 		}
 	}
 
+	componentWillMount(){
+		this.getAllCharacters();
+	}
+
+	async getAllCharacters(){
+		
+		try{
+			let response = await loginAPI();
+		} catch(err){
+			console.log(err);
+		}
+		
+		this.setState({
+			characters: response.results
+		})
+	}
 
 	onUsernameChange(text) {
 		this.setState({
@@ -40,9 +58,14 @@ class Login extends React.Component {
 		})
 		const username = this.state.username;
 		const password = this.state.password;
-		let response = await loginAPI(username, password);
 
-		//Actions.reset('Planet');
+		const verifyLoginData =  _.filter(this.state.characters, { name: username, birth_year: password})
+		console.log(verifyLoginData)
+		
+		this.setState({
+			logging: false
+		})
+		// Actions.reset('main');
 	}
 
 	render(){
@@ -66,7 +89,7 @@ class Login extends React.Component {
 					secureTextEntry={true}
 				/>
 
-				<Button onPress={this.onLoginSuccess} style={{backgroundColor: 'blue'}}> Sign up </Button>
+				<Button onPress={this.onLoginSuccess} style={{backgroundColor: 'blue'}}> LOGIN </Button>
 			</View>
 		);
 	}
@@ -79,9 +102,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  btnStyle: {
-  	backgroundColor: 'red'
-  }
 });
 
 export default Login;

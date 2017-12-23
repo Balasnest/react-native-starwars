@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text, Image } from 'react-native';
+import { TextInput, View, Text, Imageasdfasdfasdfadsfasdfasdfasdfasdfadsferq } from 'react-native';
 import { FONT_NAME } from '../config/styles';
 
 
@@ -28,7 +28,7 @@ const styles = {
       fontFamily: FONT_NAME,
       fontSize: 14,
       lineHeight: 0,
-
+      marginHorizontal: 25,
       height: 40,
       borderRadius: 3,
       borderWidth: 1,

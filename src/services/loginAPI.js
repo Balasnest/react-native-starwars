@@ -1,16 +1,16 @@
 import axios from 'react-native-axios'; 
 
-export async function loginAPI(username, password) {
+export async function loginAPI() {
   // simulate an asynchronous operation
-    const url = "https://swapi.co/api/people/?search="+username;
+    const url = "https://swapi.co/api/people";
     
 	return new Promise(function (resolve, reject) {
 		axios.get(url)
 	  	.then((response) => {
 	  		console.log("====== Login API Response =====");
-	  		console.log(response);
+	  		console.log(response.data);
 	  		if(response.status === 200)
-	  			resolve(response.data.result);
+	  			resolve(response.data);
 
 	  	})
 		.catch((error) => {
