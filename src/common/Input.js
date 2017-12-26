@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text, Imageasdfasdfasdfadsfasdfasdfasdfasdfadsferq } from 'react-native';
+import { TextInput, View, Text, Image } from 'react-native';
 import { FONT_NAME } from '../config/styles';
 
 
@@ -16,6 +16,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
           style={inputStyle}
           value={value}
           onChangeText={onChangeText}
+          underlineColorAndroid = 'transparent'
         />
    
     
@@ -27,13 +28,13 @@ const styles = {
       color: '#fff',
       fontFamily: FONT_NAME,
       fontSize: 14,
-      lineHeight: 0,
-      marginHorizontal: 25,
       height: 40,
+      width: 300,
       borderRadius: 3,
       borderWidth: 1,
       borderColor: '#ECF0F3',
-      paddingHorizontal: 10
+      paddingHorizontal: 15,
+      marginVertical: 10
   },
  
 };
