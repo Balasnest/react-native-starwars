@@ -192,11 +192,7 @@ class Planet extends React.Component {
 			<View style={container}>
 	
 				<View style={navBar}>
-					<Icon
-			          style={[styles.icon, styles.search]}
-			          name="search"
-			          size={Platform.OS === 'ios' ? 16 : 24}
-			        />
+					
 					<TextInput style={inputBox}
 			          placeholder="Find Planets by name"
 			          autoCorrect={false}
@@ -204,6 +200,12 @@ class Planet extends React.Component {
 			          onChangeText={this.onChangeSearchText}
 			          underlineColorAndroid ='transparent'
 			          returnKeyType="done"
+			        />
+
+			        <Icon
+			          style={[styles.icon, styles.search]}
+			          name="search"
+			          size={Platform.OS === 'ios' ? 16 : 24}
 			        />
 
 			        {this.state.loading ? (
@@ -236,7 +238,7 @@ class Planet extends React.Component {
 				        ItemSeparatorComponent={this.renderSeparator}
 					/>
 				) : 
-					<View style={[{flex: 1, padding: 20}, styles.center]}>
+					<View style={[{margin: 16}, styles.center]}>
 						<Text style={{fontWeight: '600', fontSize: 28, color: '#fff'}}>SEARCH PLANETS IN THE STAR WARS UNIVERSE</Text>
 					</View>
 				 }
@@ -257,7 +259,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1abc9c',
-    paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight
+    paddingTop: Platform.OS === 'ios' ? 20 : Expo.Constants.statusBarHeight
   },
   header:{
   	height:60,
@@ -285,6 +287,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
+    ...Platform.select({
+      ios: {
+      	top: 5
+      }
+    })
   },
   indicator:{
   	position: 'absolute',
@@ -295,17 +302,22 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
+    ...Platform.select({
+      ios: {
+      	top: 5
+      }
+    })
   },
   inputBox:{
   	color: '#000',
     flex: 1,
     margin: 0,
-    width: '80%',
     paddingVertical: 0,
     paddingRight: 8,
   	...Platform.select({
       ios: {
         paddingLeft: 28,
+        paddingRight: 60,
         borderRadius: 5,
         backgroundColor: '#f0f0f0',
         margin: 8,
@@ -313,6 +325,7 @@ const styles = StyleSheet.create({
       },
       default: {
         paddingLeft: 48,
+        paddingRight: 80,
         height: 48,
       },
     }),
